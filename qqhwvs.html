@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love, Trúc</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(to bottom right, #ffcccc, #ffe6e6);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            color: #e74c3c;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        .date, .time-since {
+            color: #5bc0de;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            background: url('https://i.imgur.com/kG1cGth.png') no-repeat center;
+            background-size: cover;
+            animation: float 10s infinite;
+        }
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-100vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>For My Love, Trúc</h1>
+        <p>Ngày chúng ta gặp nhau lần đầu tiên: <span class="date">16/4/2024</span></p>
+        <p>Em là người đặc biệt nhất trong cuộc đời anh. Mỗi khoảnh khắc bên em đều là những kỷ niệm đáng nhớ.</p>
+        <p>Chúng ta đã bên nhau: <span class="time-since" id="timeSince"></span></p>
+        <p>Yêu em rất nhiều!</p>
+    </div>
+    <div class="hearts"></div>
+    <script>
+        function updateTimeSince() {
+            const startDate = new Date('2024-04-16T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timeSince').textContent = 
+                `${days} ngày, ${hours} giờ, ${minutes} phút, ${seconds} giây`;
+        } setInterval(updateTimeSince, 1000);
+
+        function createHearts() {
+            const heartsContainer = document.querySelector('.hearts');
+            const heartCount = 50;
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                heart.style.opacity = Math.random();
+                heartsContainer.appendChild(heart);
+            }
+        }
+        createHearts();
+    </script>
+</body>
+</html>
